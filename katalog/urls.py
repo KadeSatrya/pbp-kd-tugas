@@ -1,4 +1,4 @@
-# TODO: Implement Routings Here
+# Routing urls.py pada katalog
 from django.urls import path
 from katalog.views import show_katalog
 

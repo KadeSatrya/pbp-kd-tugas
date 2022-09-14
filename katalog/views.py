@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from katalog.models import CatalogItem
 
-# TODO: Create your views here.
+# Method yang menerima request dan mengembalikan response
 def show_katalog(request):
     return render(request, "katalog.html", context)
 

@@ -3,7 +3,7 @@
  {% block content %}
 
   <h1>Lab 1 Assignment PBP/PBD</h1>
-
+  {% comment %} Variabel nama dan npm {% endcomment %}
   <h5>Name: </h5>
   <p>{{nama}}</p>
 
@@ -19,7 +19,7 @@
       <th>Description</th>
       <th>Item URL</th>
     </tr>
-    {% comment %} Add the data below this line {% endcomment %}
+    {% comment %} Loop untuk mengisi tiap baris tabel dengan isi dari katalog {% endcomment %}
     {% for item in list_item %}
       <tr>
         <th>{{item.item_name}}</th>
