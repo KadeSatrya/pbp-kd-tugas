@@ -5,7 +5,7 @@
         "fields": {
             "watched" : 1,
             "title" : "La Luna",
-            "rating" : 8,
+            "rating" : 4,
             "release_date" : "22/06/2012",
             "review" : "La Luna is a good short film with a great story and humor."
         }
@@ -16,7 +16,7 @@
         "fields": {
             "watched" : 0,
             "title" : "The Devil's Backbone",
-            "rating" : 7,
+            "rating" : 3,
             "release_date" : "20/04/2001",
             "review" : "In a nutshell, 'El Espinazo Del Diablo' is a horrifying, tragic but beautiful film."
         }
@@ -27,7 +27,7 @@
         "fields": {
             "watched" : 0,
             "title" : "Return of the Tooth Fairy",
-            "rating" : 6,
+            "rating" : 2,
             "release_date" : "15/06/2020",
             "review" : "What we have is a tiresome rethread of every ghostly/imaginary monster/demonic story ever told in a painfully slow way."
         }
@@ -38,7 +38,7 @@
         "fields": {
             "watched" : 1,
             "title" : "The Boss Baby: Family Business",
-            "rating" : 7,
+            "rating" : 3,
             "release_date" : "02/07/2021",
             "review" : "Fun film for kids. Definitely not as good as the first film."
         }
@@ -49,7 +49,7 @@
         "fields": {
             "watched" : 1,
             "title" : "Batman: Bad Blood",
-            "rating" : 7,
+            "rating" : 3,
             "release_date" : "19/01/2016",
             "review" : "A lot of these animated superhero features have a lot of cool stuff in them, but Batman: Bad Blood just lacked stuff that make you go: awesome!"
         }
@@ -60,7 +60,7 @@
         "fields": {
             "watched" : 0,
             "title" : "The Worst Week Of My Life",
-            "rating" : 6,
+            "rating" : 2,
             "release_date" : "28/10/2011",
             "review" : "After a few reels, just the day captions get a laugh. Throw in great looking women to flank unshaven De Luigi."
         }
@@ -71,7 +71,7 @@
         "fields": {
             "watched" : 0,
             "title" : "Upgrade",
-            "rating" : 8,
+            "rating" : 4,
             "release_date" : "18/06/2018",
             "review" : "A classic to remember. Look forward to seeing this again."
         }
@@ -82,7 +82,7 @@
         "fields": {
             "watched" : 0,
             "title" : "Ace Ventura: Pet Detective",
-            "rating" : 6,
+            "rating" : 2,
             "release_date" : "04/02/1994",
             "review" : "Watch it and believe me, you'll get hooked!"
         }
@@ -93,7 +93,7 @@
         "fields": {
             "watched" : 0,
             "title" : "Winter Sleep",
-            "rating" : 8,
+            "rating" : 4,
             "release_date" : "13/06/2014",
             "review" : "Winter Sleep is a masterpiece by Nuri Bilge Ceylan, a film shining with literary eloquence and incisive social criticism."
         }
@@ -104,7 +104,7 @@
         "fields": {
             "watched" : 1,
             "title" : "Azur & Asmar: The Princes' Quest",
-            "rating" : 8,
+            "rating" : 4,
             "release_date" : "25/10/2006",
             "review" : "It may seem curious but the word that I voiced when it ended was DELICIOUS. There are so many impacting images that linger even now in my mind's eye."
         }
