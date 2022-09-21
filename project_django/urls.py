@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('example_app.urls')),
-    path("katalog/", include("katalog.urls")) # Routing app katalog
+    path("katalog/", include("katalog.urls")), # Routing app katalog (tugas 2)
+    path("mywatchlist/", include("mywatchlist.urls")), # Routing app mywatchlist (tugas 3)
 ]
