@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
 
- {% block content %}
 
-  <h1>Lab 2 PBP</h1>
-  
-  <h5>Nama: </h5>
-  <p>Kade Satrya Noto Sadharma</p>
+    {% block content %}
 
-  <h5>NPM: </h5>
-  <p>2106752376</p>
+        <h1>Tugas 3 PBP</h1>
 
-  {% endblock content %}
+        <h5>Nama: </h5>
+        <p>Kade Satrya Noto Sadharma</p>
+
+        <h5>NPM: </h5>
+        <p>2106752376</p>
+
+
+        <h3>TUGAS BONUS</h3>
+        {% comment %} Menuliskan sesuai dengan soal berdasarkan jumlah yang sudah dan belum ditonton{% endcomment %}
+            {% if sudah_ditonton >= belum_ditonton %}
+                <p>Selamat, kamu sudah banyak menonton!</p>
+            {% else %}
+                <p>Wah, kamu masih sedikit menonton!</p>
+            {% endif %}
+
+
+    {% endblock content %}

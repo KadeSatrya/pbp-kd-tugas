@@ -9,15 +9,18 @@
       <th>Release Date</th>
       <th>Review</th>
     </tr>
-    {% comment %} Loop untuk mengisi tiap baris tabel dengan isi dari katalog {% endcomment %}
+    {% comment %} Loop untuk mengisi tiap baris tabel dengan isi dari watchlist {% endcomment %}
+    
     {% for watchlist in watchlist_data %}
       <tr>
         {% comment %} Bila watched 1 maka "Yes", bila 0 maka "No"{% endcomment %}
+        
         {% if watchlist.watched == 1 %}
-        <th>Yes</th>
+          <th>Yes</th>
         {% else %}
-        <th>No</th>
+          <th>No</th>
         {% endif %}
+        
         <th>{{watchlist.title}}</th>
         <th>{{watchlist.rating}}</th>
         <th>{{watchlist.release_date}}</th>
@@ -25,7 +28,5 @@
       </tr>
     {% endfor %}
   </table>
-
-  {% comment %} Tugas Bonus {% endcomment %}
 
  {% endblock content %}
