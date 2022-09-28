@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "new_task">
+
+    <h1>Tambah task</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Judul: </td>
+                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Deskripsi: </td>
+                <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input name="submit" type="submit" value="Tambah Task"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock content %}

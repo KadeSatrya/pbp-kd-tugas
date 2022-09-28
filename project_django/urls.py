@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('example_app.urls')),
     path("katalog/", include("katalog.urls")), # Routing app katalog (tugas 2)
     path("mywatchlist/", include("mywatchlist.urls")), # Routing app mywatchlist (tugas 3)
+    path("todolist/", include("todolist.urls")), # Routing app todolist (tugas 4)
 ]

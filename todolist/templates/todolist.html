@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        <h1>Tugas 4 PBP</h1>
+        <h3>Username: </h3>
+        <p>{{username}}</p>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Is finished</th>
+                <th>Change finish status<th>
+                <th>Delete button</th>
+            </tr>
+            {% comment %} Loop untuk mengisi tiap baris tabel dengan isi dari todolist {% endcomment %}
+
+            {% for task in todolist_data %} 
+            <tr>
+                <td>{{task.date}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                {% if task.is_finished %} 
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td> 
+                {% endif %} 
+                <td>
+                    <button>
+                        <a href="{% url 'todolist:change_finished_status' task.pk %}">Change status</a>
+                    </button>
+                </td>
+                <td>
+                    <button>
+                        <a href="{% url 'todolist:delete_task' task.pk %}">Delete</a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        {% comment %} Button untuk pindah ke menu tambah task atau logout {% endcomment %}
+        <button><a href="{% url 'todolist:new_task_form' %}">Tambah Task</a></button>
+        <button><a href="{% url 'todolist:user_logout' %}">Logout</a></button>
+
+    {% endblock content %}
