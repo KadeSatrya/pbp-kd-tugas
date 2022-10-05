@@ -2,11 +2,19 @@
 
 {% block meta %}
 <title>Registrasi Akun</title>
+<style>
+    .button-daftar{
+        background-color: black;
+        color: white;
+        font-size: 1.25em;
+        margin: 1em;
+    }
+</style>
 {% endblock meta %}
 
 {% block content %}  
 
-<div class = "login">
+<div class = "register">
     
     <h1>Formulir Registrasi</h1>  
 
@@ -16,7 +24,7 @@
                 {{ form.as_table }}  
                 <tr>  
                     <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                    <td><input type="submit" name="submit" value="Daftar" class="btn button-daftar"></td>  
                 </tr>  
             </table>  
         </form>

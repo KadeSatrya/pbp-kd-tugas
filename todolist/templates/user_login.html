@@ -2,33 +2,73 @@
 
 {% block meta %}
 <title>Login</title>
+<style>
+    h1{
+        text-align: center;
+    }
+    .login_btn{
+        font-size: 1.5em;
+        background-color: black;
+        color: white;
+        margin-top: 1em;
+    }
+    .btn-primary{
+        font-size: 1.5em;
+        margin-top: 1em;
+        background-color: black;
+        color: white;
+        border: 0ch;
+        margin-bottom: 1em;   
+    }
+    .form-control{
+        text-align: center;
+    }
+    @media (min-width: 700px){
+        .form-control{
+            width: 50%;
+            text-align: center;
+            align-content: center;
+            margin-left: 25%;
+        }
+    }    
+</style>
 {% endblock meta %}
 
 {% block content %}
 
 <div class = "login">
+    <div>
+        <h1>Login</h1>
+    </div>
+    
+    <div class="text-center">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <table class="table table-borderless align-middle">
+                <tr>
+                    <th style="font-size: 1.2em;">Username</th>
+                </tr>
+                <tr>   
+                    <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                </tr>
+                        
+                <tr>
+                    <th style="font-size: 1.2em;">Password</th>
+                </tr>
+                <tr> 
+                    <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                </tr>
 
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+                <tr>
                     
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+                    <td><input class="btn login_btn" type="submit" value="Login"></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'todolist:user_register' %}" class="btn btn-primary">Buat Akun</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
     {% if messages %}
         <ul>
@@ -38,7 +78,7 @@
         </ul>
     {% endif %}     
         
-    Belum mempunyai akun? <a href="{% url 'todolist:user_register' %}">Buat Akun</a>
+    
 
 </div>
 

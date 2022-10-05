@@ -1,47 +1,120 @@
 {% extends 'base.html' %}
+    {% block meta %}
+    <style>
+        h1{
+            text-align: center;
+        }
+        h3{
+            text-align: center;
+        }
+        h4{
+            text-align: center;
+        }
+        .todolist-title{
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-content: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px 100px;
+            justify-content: center;
+            margin-left: 75px;
+            margin-right: 75px;
+            margin-top: 20px;
+        }
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 0.1em solid rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        .card-header{
+            background-color: black;
+            color: white;
+
+        }
+        .btn-primary{
+            background-color: black;
+            border: 1px solid black;
+            margin-top: 0.7em;
+        }
+        .button-div1{
+            margin-top: 3em;
+            display: grid;
+            justify-content: center;
+            grid-template-columns: auto;
+        }
+        .button-div2{
+            margin-top: 1em;
+            display: grid;
+            justify-content: center;
+            grid-template-columns: auto;
+            margin-bottom: 2em;
+        }
+
+        .button-bottom{
+            background-color: black;
+            font-size: 2.5em;
+            color: white;
+            width: fit-content;
+        }
+        .button-bottom:hover{
+            background-color: aquamarine;
+        }
+        
+        .card:hover{
+            transition: all 0.8s;
+            background-color: skyblue;
+        }
+
+        @media (max-width: 1000px) {
+            .grid-container {  grid-template-columns: 1fr 1fr;}
+        }   
+        @media (max-width: 600px) {
+            .grid-container {  grid-template-columns: 1fr;}
+        }   
+    </style>
+    {% comment %} Tugas bonus yaitu card:hover {% endcomment %}
+    {% endblock meta %}
 
     {% block content %}
-        <h1>Tugas 4 PBP</h1>
-        <h3>Username: </h3>
-        <p>{{username}}</p>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Is finished</th>
-                <th>Change finish status<th>
-                <th>Delete button</th>
-            </tr>
-            {% comment %} Loop untuk mengisi tiap baris tabel dengan isi dari todolist {% endcomment %}
-
+        <div class="todolist-title">
+            <h1>Tugas 4 & 5 PBP</h1>
+            <h3>Hello, </h3>
+            <h4>{{username}}</h4>
+        </div>
+            {% comment %} Loop untuk mengisi tiap card dengan isi dari todolist {% endcomment %}
+        <div class="grid-container">
             {% for task in todolist_data %} 
-            <tr>
-                <td>{{task.date}}</td>
-                <td>{{task.title}}</td>
-                <td>{{task.description}}</td>
-                {% if task.is_finished %} 
-                    <td>Yes</td>
-                {% else %}
-                    <td>No</td> 
-                {% endif %} 
-                <td>
-                    <button>
-                        <a href="{% url 'todolist:change_finished_status' task.pk %}">Change status</a>
-                    </button>
-                </td>
-                <td>
-                    <button>
-                        <a href="{% url 'todolist:delete_task' task.pk %}">Delete</a>
-                    </button>
-                </td>
-            </tr>
+            <div class="card grid-item">
+                
+                <div class="card-header">
+                    {{task.date}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{task.title}}</h5>
+                    <p class="card-text">{{task.description}}</p>
+                    {% if task.is_finished %} 
+                        <p class="card-text">Done</p>
+                    {% else %}
+                        <p class="card-text">Not done</p> 
+                    {% endif %} 
+                    
+                    <a href="{% url 'todolist:change_finished_status' task.pk %}" class="btn btn-primary">Change status</a>
+                    <br>
+                    <a href="{% url 'todolist:delete_task' task.pk %}" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
             {% endfor %}
+        </div>
 
-        </table>
 
         {% comment %} Button untuk pindah ke menu tambah task atau logout {% endcomment %}
-        <button><a href="{% url 'todolist:new_task_form' %}">Tambah Task</a></button>
-        <button><a href="{% url 'todolist:user_logout' %}">Logout</a></button>
-
+        <div class="button-div1">
+            <a href="{% url 'todolist:new_task_form' %}"class="btn button-bottom">Tambah Task</a>
+        </div>
+        <div class="button-div2">
+            <a href="{% url 'todolist:user_logout' %}"class="btn button-bottom">Logout</a>
+        </div>
     {% endblock content %}

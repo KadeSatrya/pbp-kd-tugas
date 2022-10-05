@@ -1,5 +1,7 @@
 # Link App Heroku
+https://pbp-kd-tugas.herokuapp.com/todolist/
 
+# TUGAS 4
 # A. Apa kegunaan {% csrf_token %} pada elemen <form>? Apa yang terjadi apabila tidak ada potongan kode tersebut pada elemen <form>?
 `{% csrf_token %}` digunakan untuk melindungi dari serangan CSRF. `{% csrf_token %}` akan menghasilkan suatu token yang akan dicocokkan dengan token request yang masuk. Bila token tidak sama, request tersebut tidak akan dijalankan. 
 
@@ -44,3 +46,51 @@ Data yang disubmit pada `form HTML` akan diproses oleh `views` dan diteruskan ke
 
 ## Deployment ke Heroku
 1. Melakukan commit dan push ke github
+
+# TUGAS 5
+
+# A. Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+1. Inline CSS adalah CSS yang diletakkan di dalam tag HTML. Keuntungan dari Inline CSS adalah kecepatan pengerjaan bila dilakukan dalam skala kecil. Kekurangannya adalah bila file yang dikerjakan memiliki skala yang besar, akan memakan waktu yang lama untuk mendekorasi tiap tag yang ada.
+
+2. Internal CSS adalah CSS yang diletakkan di dalam file HTML yang sama namun berada dalam tag `<style>`. Keuntungan dari internal CSS adalah mengurangi jumlah file bila dibandingkan dengan external CSS dan mempercepat pekerjaan dalam skala besar bila dibandingkan dengan inline CSS. Kerugiannya adalah memperbesar ukuran halaman website dan memperlambat waktu loading.
+
+3. External CSS adalah CSS yang diletakkan di dalam file CSS tersendiri yang terpisah dari file HTML. Keuntungan dari external CSS adalah mempercepat waktu pekerjaan karena style CSS dalam satu file bisa digunakan oleh beberapa file HTML. Kerugiannya adalah waktu loading yang lebih lambat karena terdapat lebih banyak file.
+
+
+# B. Jelaskan tag HTML5 yang kamu ketahui.
+1. `<table>` untuk mendefinisikan suatu tabel
+2. `<tr>` untuk baris dalam suatu tabel
+3. `<th>` untuk header cell dalam suatu baris tabel
+4. `<td>` untuk data cell dalam suatu baris tabel
+5. `<a>` untuk menuliskan hyperlink
+6. `<form>` untuk mendefinisikan form HTML untuk menerima input
+7. `<input>` untuk menerima input pengguna
+8. `<title>` untuk menuliskan nama dokumen yang akan ditunjukkan
+9. `<p>` untuk menuliskan suatu paragraf
+10. `<head>` untuk mendefinisikan bagian head dari dokumen HTML
+11. `<body>` untuk mendefinisikan bagian body dari dokumen HTML
+12. `<div>` untuk mendefinisikan pembagian-pembagian dalam dokumen HTML
+
+# C. Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+Selector pada CSS digunakan untuk menunjuk suatu hal pada HTML yang ingin kita ubah dengan CSS. Jenis-jenis selector yang saya ketahui adalah:
+
+1. Element Selector yang menunjuk tag HTML. Penulisannya tidak diawali dengan tanda apapun. Contohnya bila ingin mengubah tag `<p>` maka akan dituliskan sebagai `p{}`.
+
+2. ID Selector yang menunjuk ke ID dalam tag HTML. Penulisannya diawali dengan tanda `#`. Contohnya bila ingin mengubah `<div id="random">` maka akan dituliskan sebagai `#random{}`.
+
+3. Class Selector yang menunjuk class dalam tag HTML. Penulisannya diawali dengan tanda `.`. Contohnya bila ingin mengubah `div class="next"` maka akan dituliskan sebagai `.class{}`.
+
+# D. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+
+## Kustomisasi templat untuk halaman login, register, dan create-task
+1. Menambahkan link ke bootstrap di bagian `<head>` pada `base.html` yang akan diextend oleh template html lainnya
+2. Mendekorasi template `user_login.html`, `new_task_form.html`, dan `user_register.html` menggunakan CSS
+
+## Kustomisasi halaman utama todo list menggunakan cards.
+1. Mengubah struktur template `todolist.html` dari menggunakan `table` menjadi menggunakan `card` melalui `div class="card"`
+2. Memasukkan tiap `task` ke dalam suatu container yang menggunakan layout `grid` dengan memasukkan `for loop` ke dalam `div` container
+3. Mendekorasi template `todolist.html` menggunakan CSS
+
+## Membuat keempat halaman yang dikustomisasi menjadi responsive.
+1. Menambahkan `@media (max-width)` ke `<style>` dalam `todolist.html` untuk mengubah `grid-template-columns` yang mengatur jumlah `card` tiap baris agar menyamakan jumlah card tiap baris sesuai dengan `max-width` yang ditentukan
+2. Menambahkan `@media (min-width)` ke `<style>` dalam `new_task_form.html` dan `user_login.html` untuk mengubah `width` dari `form-control` agar tidak terlalu panjang bila ukuran layar sudah melewati `min-width` yang ditentukan

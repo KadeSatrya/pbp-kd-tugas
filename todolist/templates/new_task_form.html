@@ -1,34 +1,59 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<title>Login</title>
+<title>Create Task</title>
+<style>
+    h1{
+        text-align: center;
+    }
+    .submit-button{
+        margin: 1em;
+        background-color: black;
+        color: white;
+        font-size: 1.5em;
+    }
+    
+    @media (min-width: 700px){
+        .form-control{
+            width: 50%;
+            text-align: center;
+            align-content: center;
+            margin-left: 25%;
+        }
+    }    
+</style>
 {% endblock meta %}
 
 {% block content %}
 
 <div class = "new_task">
+    <div>
+        <h1>Tambah task</h1>
+    </div>
+    <div class="text-center">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <table class="table table-borderless align-middle">
+                <tr>
+                    <th style="font-size: 1.2em;">Judul: </th>
+                </tr>
+                <tr> 
+                    <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+                </tr>
+                        
+                <tr>
+                    <th style="font-size: 1.2em;">Deskripsi: </th>
+                </tr>
+                <tr> 
+                    <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
+                </tr>
 
-    <h1>Tambah task</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Judul: </td>
-                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Deskripsi: </td>
-                <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input name="submit" type="submit" value="Tambah Task"></td>
-            </tr>
-        </table>
-    </form>
+                <tr>
+                    <td><input name="submit" type="submit" value="Tambah Task" class="btn submit-button"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 
 {% endblock content %}
