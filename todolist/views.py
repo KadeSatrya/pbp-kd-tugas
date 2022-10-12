@@ -6,6 +6,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Merestriksi show_todolist sehingga memerlukan login
 @login_required(login_url='/todolist/login/')
@@ -16,11 +19,14 @@ def show_todolist(request):
     """
     todolist_data = Task.objects.filter(user = request.user)
     context = {
-        "todolist_data" : todolist_data,
         "username" : request.user.get_username(),
     }
     return render(request, "todolist.html", context)
 
+@login_required(login_url='/todolist/login/')
+def show_json(request):
+    todolist_data = Task.objects.filter(user = request.user)
+    return JsonResponse({'json_data': list(todolist_data.values())})
 
 def user_register(request):
     """
@@ -79,7 +85,23 @@ def new_task_form(request):
             return(redirect("todolist:show_todolist"))
     return render(request, "new_task_form.html")
 
-# TUGAS BONUS
+@login_required(login_url='/todolist/login/')
+def add_task_ajax(request):
+    if request.method == "POST":
+        user = request.user
+        title = request.POST.get("judul")
+        description = request.POST.get("deskripsi")
+        task = Task.objects.create(user = user, title=title, description=description)
+        return JsonResponse({'title': task.title, "description": task.description, "date": task.date, "is_finished": task.is_finished, "id": task.pk}) 
+
+# TUGAS BONUS AJAX DELETE Tugas 6
+@csrf_exempt   
+def delete(request, pk):
+    if request.method == "DELETE":
+        Task.objects.get(id = pk).delete()
+        return JsonResponse({})
+
+# TUGAS BONUS DELETE DAN CHANGE_STATUS Tugas 4
 
 def change_finished_status(request, pk):
     task = Task.objects.get(pk = pk)

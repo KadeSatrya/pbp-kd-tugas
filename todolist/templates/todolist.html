@@ -50,6 +50,12 @@
             display: grid;
             justify-content: center;
             grid-template-columns: auto;
+        }
+        .button-div3{
+            margin-top: 1em;
+            display: grid;
+            justify-content: center;
+            grid-template-columns: auto;
             margin-bottom: 2em;
         }
 
@@ -76,45 +82,167 @@
         }   
     </style>
     {% comment %} Tugas bonus yaitu card:hover {% endcomment %}
+    <Script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "{% url 'todolist:show_json' %}",
+                type: 'GET',
+                dataType: 'json',
+            }).done(function(response) {
+                for (var i in response.json_data) {
+                    var task = response.json_data[i]
+                    if (task.is_finished) {
+                        var card = `
+                        <div class="card grid-item" id="card${task.id}">
+                            <div class="card-header">
+                                ${task.date}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${task.title}</h5>
+                                <p class="card-text">${task.description}</p>
+                                <p class="card-text">Done</p>
+                                <button class="btn btn-primary" onclick="delete_task(${task.id})">Delete</button>
+                            </div>
+                        </div>
+                        `
+                    } else {
+                        var card = `
+                        <div class="card grid-item" id="card${task.id}">
+                            <div class="card-header">
+                                ${task.date}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${task.title}</h5>
+                                <p class="card-text">${task.description}</p>
+                                <p class="card-text">Not done</p>
+                                <button class="btn btn-primary delete" onclick="delete_task(${task.id})">Delete</button>
+                            </div>
+                        </div>
+                        `
+                    }
+                    $('#todolist').append(card)
+                }
+                
+            })
+        })
+        $(document).ready(function() {
+            $('#add-task-form').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "{% url 'todolist:add_task_ajax' %}",
+                    type: 'POST',
+                    data: {
+                        judul: $('#judul').val(),
+                        deskripsi: $('#deskripsi').val(),
+                        csrfmiddlewaretoken: "{{csrf_token}}",
+                    },
+                }).done(function(response) {
+                    if (response.is_finished) {
+                        var card = `
+                        <div class="card grid-item" id="card${response.id}">
+                            <div class="card-header">
+                                ${response.date}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${response.title}</h5>
+                                <p class="card-text">${response.description}</p>
+                                <p class="card-text">Done</p>
+                                <button class="btn btn-primary" onclick="delete_task(${response.id})">Delete</button>
+                            </div>
+                        </div>
+                        `
+                        
+                    } else {
+                        var card = `
+                        <div class="card grid-item" id="card${response.id}">
+                            <div class="card-header">
+                                ${response.date}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${response.title}</h5>
+                                <p class="card-text">${response.description}</p>
+                                <p class="card-text">Not done</p>
+                                <button class="btn btn-primary" onclick="delete_task(${response.id})">Delete</button>
+                            </div>
+                        </div>
+                        `
+                    }
+                    $('#todolist').append(card)
+
+                })
+                $(this).trigger('reset')
+            })
+        })
+        // Tugas Bonus Tugas 6
+        function delete_task(id){
+            $.ajax({
+                type :"DELETE",
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+                url :`delete/${id}`,
+                success: function (){
+                    $(`#card` + id).remove()
+                },
+            })
+        }
+
+    </Script>
     {% endblock meta %}
 
     {% block content %}
         <div class="todolist-title">
-            <h1>Tugas 4 & 5 PBP</h1>
+            <h1>Tugas 4 & 5 & 6 PBP</h1>
             <h3>Hello, </h3>
             <h4>{{username}}</h4>
         </div>
-            {% comment %} Loop untuk mengisi tiap card dengan isi dari todolist {% endcomment %}
-        <div class="grid-container">
-            {% for task in todolist_data %} 
-            <div class="card grid-item">
-                
-                <div class="card-header">
-                    {{task.date}}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{task.title}}</h5>
-                    <p class="card-text">{{task.description}}</p>
-                    {% if task.is_finished %} 
-                        <p class="card-text">Done</p>
-                    {% else %}
-                        <p class="card-text">Not done</p> 
-                    {% endif %} 
-                    
-                    <a href="{% url 'todolist:change_finished_status' task.pk %}" class="btn btn-primary">Change status</a>
-                    <br>
-                    <a href="{% url 'todolist:delete_task' task.pk %}" class="btn btn-primary">Delete</a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+        <div class="grid-container" id="todolist"></div>
 
-
-        {% comment %} Button untuk pindah ke menu tambah task atau logout {% endcomment %}
+        {% comment %} Button untuk pindah ke menu tambah task atau logout dan button untuk membuka modal add task {% endcomment %}
         <div class="button-div1">
             <a href="{% url 'todolist:new_task_form' %}"class="btn button-bottom">Tambah Task</a>
         </div>
         <div class="button-div2">
+            <!--Button untuk memunculkan modal-->
+            <button type="button" class="btn button-bottom" data-bs-toggle="modal" data-bs-target="#AddTaskModal">Add Task (AJAX)</button>
+        </div>
+        <div class="button-div3">
             <a href="{% url 'todolist:user_logout' %}"class="btn button-bottom">Logout</a>
         </div>
+        
+        <!--Modal yang akan dimunculkan ketika menekan button Add Task-->
+        <div class="modal fade" id="AddTaskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: black;">
+                        <h1 class="modal-title fs-5 " id="exampleModalLabel" style="color: white;">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <form method="POST" id="add-task-form">
+                            {% csrf_token %}
+                            <table class="table table-borderless align-middle">
+                                <tr>
+                                    <th style="font-size: 1.2em;">Judul: </th>
+                                </tr>
+                                <tr> 
+                                    <td><input type="text" name="title" placeholder="Title" class="form-control" id="judul"></td>
+                                </tr>
+                                        
+                                <tr>
+                                    <th style="font-size: 1.2em;">Deskripsi: </th>
+                                </tr>
+                                <tr> 
+                                    <td><input type="text" name="description" placeholder="Description" class="form-control" id="deskripsi"></td>
+                                </tr>
+                
+                                <tr>
+                                    <td><input name="submit" type="submit" value="Tambah Task" class="btn btn-primary" data-bs-dismiss="modal"></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
     {% endblock content %}
